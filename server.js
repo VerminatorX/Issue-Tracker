@@ -2,9 +2,26 @@
 
 const express     = require('express');
 const bodyParser  = require('body-parser');
-const expect      = require('chai').expect;
 const cors        = require('cors');
 require('dotenv').config();
+
+const mongoose = require("mongoose")
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("Connected to MongoDB")
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB", err)
+  })
+
+/* mongoose.connect("mongodb://127.0.0.1:27017", { useNewUrlParser: true, useUnifiedTopology: true });
+const connection = mongoose.connection;
+connection.once("open", function() {
+  console.log("connected")
+  mongoose.connection.db.dropDatabase(
+    console.log("database dropped")
+  )
+}) */
 
 const apiRoutes         = require('./routes/api.js');
 const fccTestingRoutes  = require('./routes/fcctesting.js');
